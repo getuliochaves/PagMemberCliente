@@ -3,11 +3,7 @@
 Plugin Name: PagMemberCliente
 Plugin URI: http://www.pagmember.com
 Description: Versão Cliente do Plugin PagMember, usado para integração com o Hotmart e PagSeguro e área de Membros. Após a aprovação do pagamento, gera o usuário e a senha para o cliente e envia para o email automaticamente.
-<<<<<<< HEAD
-Version: 5.1
-=======
 Version: 5.2
->>>>>>> 528f4b330ef2d6cb26c9533dee7b70b9a7f26ae3
 Author: Getulio Chaves
 Author URI: http://www.geracaodigital.com
 License: GPLv2
