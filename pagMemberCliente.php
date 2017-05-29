@@ -3,7 +3,7 @@
 Plugin Name: PagMemberCliente
 Plugin URI: http://www.pagmember.com
 Description: Versão Cliente do Plugin PagMember, usado para integração com o Hotmart e PagSeguro e área de Membros. Após a aprovação do pagamento, gera o usuário e a senha para o cliente e envia para o email automaticamente.
-Version: 5.0
+Version: 5.1
 Author: Getulio Chaves
 Author URI: http://www.geracaodigital.com
 License: GPLv2
@@ -13,7 +13,7 @@ License: GPLv2
 require_once('updater.php');
 
 if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
-		$config = array(
+		$config_pagmembercliente = array(
 			'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
 			'proper_folder_name' => 'PagMemberCliente', // this is the name of the folder your plugin lives in
 			'api_url' => 'https://api.github.com/repos/getuliochaves/PagMemberCliente', // the GitHub API url of your GitHub repo
@@ -26,7 +26,7 @@ if (is_admin()) { // note the use of is_admin() to double check that this is hap
 			'readme' => 'README.md', // which file to use as the readme for the version number
 			'access_token' => '', // Access private repositories by authorizing under Appearance > GitHub Updates when this example plugin is installed
 		);
-		new WP_GitHub_Updater($config);
+		new WP_GitHub_Updater_PagMemberCliente($config_pagmembercliente);
 	}
 
 global $wpdb;
