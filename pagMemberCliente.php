@@ -10,7 +10,6 @@ License: GPLv2
 */
 ?>
 <?php
-require_once('updater.php');
 
 if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
 		$config = array(
