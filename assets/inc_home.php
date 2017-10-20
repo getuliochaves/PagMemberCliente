@@ -24,6 +24,9 @@ include_once('inc_inicio.php');
 		<div class="panel panel-default">
 			<div class="panel-body">
 
+			<a class="btn btn-large btn-success" href="admin.php?page=pagmemberCliente&pg=convertecli&converte=sim">Colocar todos os Usuários como Alunos</a>
+			<a class="btn btn-large btn-danger" href="admin.php?page=pagmemberCliente&pg=convertecli&converte=remove">Remover todos os Usuários como Alunos</a>
+
 
 
            <?php
@@ -37,7 +40,9 @@ include_once('inc_inicio.php');
            include_once('inc_relatorios.php');
 		    break;
 
-
+				case 'converterclientes':
+					 include_once('inc_convertecli.php');
+			 break;
 
 			case 'clientes':
            include_once('inc_clientes.php');

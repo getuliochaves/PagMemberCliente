@@ -5,7 +5,24 @@ global $wp_roles;
 //  var_dump($wp_roles);
 $pegaUsuarios = $wpdb->get_results("SELECT ID FROM $wpdb->users ORDER BY ID DESC");
 $loadingImg = get_site_url().'/wp-content/plugins/PagMemberCliente/imagens/loading.gif';
+
+
+$contaUsuario = 0;
+foreach($pegaUsuarios as $idUsuarios){
+$idUsuario = $idUsuarios->ID;
+$metasUsuario = get_user_meta($idUsuario);
+$clientePagMember = $metasUsuario['clientePagMember'][0];
+  if($clientePagMember == 'sim'){
+  $contaUsuario = $contaUsuario + 1;
+};
+};
 ?>
+</br>
+</br>
+<div class="alert alert-success" style="padding: 10px; ">
+  <h4 style="padding:0; margin: 0;"><strong>Total de Clientes:</strong> <?php echo $contaUsuario; ?> Clientes Cadastrados no seu site.</h4>  
+</div>
+
 <table class="table table-bordered">
         <thead>
           <tr class="success" style="text-align:center;">
@@ -20,7 +37,8 @@ $loadingImg = get_site_url().'/wp-content/plugins/PagMemberCliente/imagens/loadi
 
         <?php
 		//Foreach lista usuarios
-        foreach($pegaUsuarios as $idUsuarios){
+
+    foreach($pegaUsuarios as $idUsuarios){
 		$idUsuario = $idUsuarios->ID;
 
 		$dadosUsuario = get_userdata($idUsuario);
@@ -33,6 +51,9 @@ $loadingImg = get_site_url().'/wp-content/plugins/PagMemberCliente/imagens/loadi
 		//var_dump($dadosUsuario);
 			//Verifica se é cliente
 			if($clientePagMember == 'sim'){
+
+
+
 			$chaveRole = key($dadosUsuario->roles);
 			$funcaoUsuario = $dadosUsuario->roles[$chaveRole];
 			$dataRegistro0 = $dadosUsuario->user_registered;
@@ -107,6 +128,10 @@ unset($pacotes[$funcaoUsuario]);
 
 
 
+
+
+
+
   <!-- Modal -->
   <div class="modal fade" id="modalTransacoes" role="dialog" style="margin-top:50px; z-index:9999999999999 !important;">
     <div class="modal-dialog modal-lg" style="width:90% !important;">
@@ -155,6 +180,7 @@ $h(document).ready(function(){
 		//$h('.enviaFrame').attr('src','Carregando...');
 		$h('.conteudoFrame').html('<div class="loading"><img src="<?php echo $loadingImg ; ?>"/></div>');
 	});
+
 
 
 });

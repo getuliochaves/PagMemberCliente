@@ -4,23 +4,19 @@ $nomeEOT = $base_prefixo.'optimizemember_paid_registration_times';
 $nomeAutoEOT = $base_prefixo.'optimizemember_auto_eot_time';
 //Define um array pra data Agora
 $dataAgoraEOT = time();
-//Se $eotCli for Ativar, ele manipula o EOT TIme
 
+//Executa somente se o eot estiver ativado
 if($eotCli == 'Ativar'){
-  $pegaEOT2 = $wpdb->get_var("SELECT umeta_id FROM $wpdb->usermeta WHERE user_id = '$idUsuario' AND meta_key = '$nomeEOT'");
 
   $pegaEOT = $wpdb->get_var("SELECT meta_value FROM $wpdb->usermeta WHERE user_id = '$idUsuario' AND meta_key = '$nomeEOT'");
   $pegaEOT = unserialize($pegaEOT);
+  $nTimeDB = $pegaEOT['level'];
 
-  //var_dump($pegaEOT2);
-
-  //Se existir EOT time,
-  if(count($pegaEOT) > 0){
-
-    $nTimeDB = $pegaEOT['level'];
-    $nTimeNovo = $nTimeDB + ((60 * 60 * 24) * $eotProd);
-
+  //SE for Aprovado
+  if($statusTrasacao == 3){
+    $nTimeNovo = $nTimeDB + (86400 * $eotProd);
     $gdNTime = array('level' => $nTimeNovo, $nivelProd => $nTimeNovo);
+
 
     $grNtimeFinal = serialize($gdNTime);
     $wpdb->query("UPDATE $wpdb->usermeta SET meta_value = '$grNtimeFinal' WHERE user_id = '$idUsuario' AND meta_key = '$nomeEOT'");
@@ -33,35 +29,36 @@ if($eotCli == 'Ativar'){
       $wpdb->query("UPDATE $wpdb->usermeta SET meta_value = '$nTimeNovo' WHERE user_id = '$idUsuario' AND meta_key = '$nomeAutoEOT'");
     }
 
-  //Fim se existir EOT time,
-  }else{
-    //Se não exitir EOT TIme
-    $nTimeNovo = $dataAgoraEOT + ((60 * 60 * 24) * $eotProd);
-    $gdNTime =  array('level' => $nTimeNovo, $nivelProd => $nTimeNovo);
+
+
+  }; //FIM SE for Aprovado
+
+
+
+
+  //SE for cacenlado
+  if($statusTrasacao >= 6){
+
+    $dataCompra = $pagamentosUsuario[$tipoProd][$idTransacao]['dataGrava'];
+    $totalComprado = $pagamentosUsuario[$tipoProd][$idTransacao]['eotProd'];
+
+    $totalComprado = $totalComprado - 1;
+
+    $dCompra = strtotime($dataCompra);
+    $diasPassados = $dCompra - $dataAgoraEOT;
+    $diasASerReduzidos = ($totalComprado * 86400) - $diasPassados;
+
+    $nTimeDB = $pegaEOT['level'];
+
+    $nTimeNovo = $nTimeDB - $diasASerReduzidos;
+    $gdNTime = array('level' => $nTimeNovo, $nivelProd => $nTimeNovo);
 
     $grNtimeFinal = serialize($gdNTime);
-
-    if(count($pegaEOT2) == 0){
-    $wpdb->insert($wpdb->usermeta, array('meta_key' => $nomeEOT,'meta_value' => $grNtimeFinal, 'user_id' => $idUsuario));
-    }else{
     $wpdb->query("UPDATE $wpdb->usermeta SET meta_value = '$grNtimeFinal' WHERE user_id = '$idUsuario' AND meta_key = '$nomeEOT'");
-    }
-
-  $pegaAutoEOT = $wpdb->get_var("SELECT umeta_id FROM $wpdb->usermeta WHERE user_id = '$idUsuario' AND meta_key = '$nomeAutoEOT'");
-  if(count($pegaAutoEOT) == 0){
-    $wpdb->insert($wpdb->usermeta, array('meta_key' => $nomeAutoEOT,'meta_value' => $nTimeNovo, 'user_id' => $idUsuario));
-  }else{
     $wpdb->query("UPDATE $wpdb->usermeta SET meta_value = '$nTimeNovo' WHERE user_id = '$idUsuario' AND meta_key = '$nomeAutoEOT'");
-  }
 
 
 
-  };//FIM Se não exitir EOT TIme
-
-  //$wpdb->query("DELETE FROM $wpdb->usermeta WHERE user_id = $idUsuario AND meta_key = 'wp_optimizemember_auto_eot_time'");
-//  $wpdb->insert($wpdb->usermeta, array('meta_key' => 'testekkkkkk','meta_value' => 'novidade', 'user_id' => $idUsuario));
-
-  //$wpdb->query("UPDATE $wpdb->usermeta SET meta_value = '$nTimeNovo' WHERE user_id = '$idUsuario' AND meta_key = '$nomeAutoEOT'");
-
-};//FIm Se $eotCli for Ativar, ele manipula o EOT TIme
+  };//FIM  SE for cacenlado
+};//FIM somente se o eot estiver ativado
 ?>

@@ -37,6 +37,8 @@
 
 		//var_dump($capacidadesGeral);
 
+		 include_once('inc_eottime.php');
+
 		$pacoteProdGrava = serialize($pacoteProd);
 		$pagamentosUsuario[$tipoProd][$idTransacao]['statusTrasacao'] = $statusTrasacao;
 		$pagamentosUsuario[$tipoProd][$idTransacao]['statusCompra'] = $statusCompra;

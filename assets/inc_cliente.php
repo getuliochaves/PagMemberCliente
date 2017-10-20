@@ -157,7 +157,7 @@ if($vefificaLogado == true){
             <?php
             if($vefificaLogado == true){
 			?>
-        
+
             <button type="button" class="btn btn-default fecharModal" data-dismiss="modal">Fechar</button>
 
            <?php

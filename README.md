@@ -3,8 +3,14 @@
 Plugin para Gerenciar Membros no PagMember, que integra automaticamente com PagSeguro, Hotmart, Monetizze e Eduzz.
 
 ## Changelog
-### 5.2
-* Atualização de Servidor
+
+### 5.6
+* Adicionado Função que conta quantidade de Clientes Cadastrados.
+
+### 5.5
+* Atualização de EOT Time OptimizePress
+* Função Adicionar e Remover Usuario Como alunos
+
 
 ### 5.1
 * Atualização de Criação de Transações do Cliente
