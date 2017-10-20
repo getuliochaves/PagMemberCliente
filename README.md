@@ -1,5 +1,3 @@
-Current Version:5.6
-
 # PagMembercliente
 
 Plugin para Gerenciar Membros no PagMember, que integra automaticamente com PagSeguro, Hotmart, Monetizze e Eduzz.
@@ -29,3 +27,5 @@ Licença privada, disponivel para assinantes do geracaodigital.com
 * Av Afonso Pena, 167
 * Belo Horizonte, MG
 * Brasil
+
+`~Current Version:5.6~`
