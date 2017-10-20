@@ -4,7 +4,7 @@ Plugin para Gerenciar Membros no PagMember, que integra automaticamente com PagS
 
 ## Atualizações
 
-~Current Version:5.6~
+Current Version:5.6
 
 ## Changelog
 
