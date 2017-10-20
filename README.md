@@ -1,4 +1,4 @@
-~Current Version:5.6~
+Current Version:5.6
 
 # PagMembercliente
 
