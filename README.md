@@ -1,12 +1,12 @@
+~Current Version:5.9~
+
 # PagMembercliente
 
 Plugin para Gerenciar Membros no PagMember, que integra automaticamente com PagSeguro, Hotmart, Monetizze e Eduzz.
 
-## Atualizações
-
-Current Version:5.6
-
 ## Changelog
+### 5.9
+* Integração com O PagMember 5.9
 
 ### 5.6
 * Adicionado Função que conta quantidade de Clientes Cadastrados.
